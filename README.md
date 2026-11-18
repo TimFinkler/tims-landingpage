@@ -46,4 +46,21 @@ Alles steht direkt in `index.html`. Die Farben, Schriften und Abstände sind obe
 | `--ink`, `--muted` | Text |
 | `--bg`, `--surface`, `--line` | Flächen und Linien |
 
-Der Dark Mode ist in zwei Blöcken direkt darunter definiert (einmal `prefers-color-scheme`, einmal `[data-theme="dark"]`). Wer eine Farbe ändert, ändert sie in beiden.
+Die Startseite ist bewusst **nur dunkel** – die Lichtstimmung trägt das Design. Impressum und Datenschutz folgen dagegen der Systemeinstellung.
+
+## Bewegung
+
+Alles Animierte sitzt im `<script>` ganz unten und respektiert `prefers-reduced-motion`:
+
+| Element | Was passiert |
+| --- | --- |
+| Intro | Porträt, Chips, Headline und Buttons kommen gestaffelt herein |
+| Lichter (`.orb`) | driften langsam im Hintergrund |
+| Zeiger | weicher Lichtschein folgt der Maus, Porträt bewegt sich leicht mit |
+| Karten | Schimmer folgt dem Zeiger über die Karte |
+| Buttons `.magnetic` | ziehen den Zeiger leicht an |
+| Zeitstrahl | die Linie im Werdegang füllt sich beim Scrollen |
+| Abschnitte `.reveal` | blenden beim Scrollen ein (Sicherheitsnetz: nach 2,5 s sind sie in jedem Fall sichtbar) |
+| Fortschrittsbalken | oben am Rand, zeigt die Scroll-Position |
+
+Wer es ruhiger mag: Im Markup die Klasse `reveal` entfernen, oder im `<style>` den Block unter `@media (prefers-reduced-motion: no-preference)` löschen.
