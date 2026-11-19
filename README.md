@@ -11,6 +11,8 @@ impressum.html      Impressum – Platzhalter müssen vor dem Livegang ausgefül
 datenschutz.html    Datenschutzerklärung – ebenso
 favicon.svg         Monogramm TF
 assets/img/         Fotos (optimiert, EXIF-Daten entfernt)
+  tim-cutout.webp   freigestelltes Porträt für den Hero-Bereich
+  tim-portrait.jpg  Originalfoto, dient als Vorschaubild beim Teilen (og:image)
 ```
 
 ## Lokal ansehen
@@ -34,6 +36,24 @@ Jeder Static-Hoster funktioniert – Repository verbinden, Root-Verzeichnis als 
 2. **Entscheiden, ob die Telefonnummer öffentlich stehen soll.** Sie steht in `index.html` im Abschnitt `#kontakt` und in beiden Rechtsseiten.
 3. **Optional: Google Fonts lokal einbinden.** Dann werden keine IP-Adressen an Google übertragen und der Abschnitt „Schriftarten" in der Datenschutzerklärung entfällt. Dazu die Schriften Archivo, IBM Plex Sans und IBM Plex Mono herunterladen, unter `assets/fonts/` ablegen, per `@font-face` einbinden und den `<link>` auf fonts.googleapis.com entfernen.
 4. **Optional: LinkedIn / GitHub verlinken**, im Kontaktblock in `index.html`.
+
+## Das freigestellte Porträt
+
+`tim-cutout.webp` ist das Hero-Bild ohne Hintergrund: per Segmentierungsmodell
+(U²-Net, Variante für Personen) aus dem Originalfoto gelöst, Kante um rund einen
+Pixel eingezogen, damit kein heller Saum bleibt, und unten weich ausgeblendet –
+dadurch taucht das Motiv aus dem Dunkel auf, statt abgeschnitten zu wirken.
+Schatten und Lichtkranz entstehen in CSS über `drop-shadow` und folgen deshalb
+automatisch der Silhouette.
+
+Für ein neues Foto: freistellen (jedes Werkzeug, das transparentes PNG/WebP
+ausgibt), unten ausblenden, als WebP mit Transparenz speichern und die Datei
+ersetzen. Die Maße im `<img>` (`width`/`height`) anpassen, sonst springt das
+Layout beim Laden.
+
+Das Hero-Bild wird **nur als WebP** ausgeliefert. Alle Browser ab etwa 2020
+können das; wer ältere unterstützen muss, legt zusätzlich ein PNG daneben und
+baut ein `<picture>`-Element darum.
 
 ## Inhalte ändern
 

@@ -154,40 +154,37 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 /* ---------- Bühne / Hero ---------- */
 .hero{position:relative}
-.hero > .wrap{padding-block:clamp(36px,6vw,64px) clamp(60px,8vw,110px);display:grid;justify-items:center;text-align:center}
+.hero > .wrap{padding-block:clamp(26px,4vw,48px) clamp(60px,8vw,110px);display:grid;justify-items:center;text-align:center}
 
-.portrait-stage{position:relative;width:min(100%,322px);margin-bottom:clamp(30px,4vw,48px);will-change:transform}
-.portrait-frame{position:relative;border-radius:22px;overflow:hidden;isolation:isolate;
-  box-shadow:0 40px 90px -40px rgba(0,0,0,.95), 0 0 0 1px var(--line-strong) inset}
-.portrait-frame img{width:100%;height:clamp(290px,44vh,430px);object-fit:cover;object-position:50% 15%;filter:contrast(1.04) saturate(.92) brightness(.94)}
-.portrait-frame::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to bottom, rgba(7,13,15,.34) 0%, rgba(7,13,15,0) 32%, rgba(7,13,15,.24) 70%, rgba(7,13,15,.92) 100%),
-             linear-gradient(to right, rgba(7,13,15,.55), rgba(7,13,15,0) 24%, rgba(7,13,15,0) 76%, rgba(7,13,15,.55)),
-             radial-gradient(130% 90% at 50% 20%, rgba(224,138,82,.16), transparent 60%)}
-.portrait-stage::before{content:"";position:absolute;inset:-22% -24% -16%;z-index:-1;
-  background:radial-gradient(closest-side, rgba(224,138,82,.4), rgba(224,138,82,0) 72%)}
+.hero-figure{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;
+  gap:clamp(10px,2.4vw,34px);width:100%;margin-bottom:clamp(22px,3vw,34px);perspective:1200px}
 
-.chip{position:absolute;z-index:2;display:grid;gap:3px;padding:11px 15px;border-radius:14px;text-align:left;
+.portrait{position:relative;justify-self:center;width:clamp(222px,24vw,302px);will-change:transform;transform-style:preserve-3d}
+.portrait-img{position:relative;z-index:1;width:100%;height:auto;
+  filter:drop-shadow(0 30px 36px rgba(0,0,0,.85)) drop-shadow(0 0 32px rgba(224,138,82,.26))}
+.portrait::before{content:"";position:absolute;z-index:0;left:50%;top:0;width:126%;aspect-ratio:1;transform:translateX(-50%);
+  background:radial-gradient(closest-side, rgba(224,138,82,.36), rgba(224,138,82,0) 72%)}
+.portrait::after{content:"";position:absolute;z-index:0;left:50%;bottom:3%;width:70%;height:56px;transform:translateX(-50%);
+  background:radial-gradient(closest-side, rgba(224,138,82,.22), rgba(224,138,82,0) 74%)}
+
+.chip-col{display:grid;gap:clamp(14px,2.4vw,30px);justify-items:end;will-change:transform}
+.chip-col.is-right{justify-items:start}
+.chip-col > .chip:first-child{translate:0 -16px}
+.chip-col > .chip:last-child{translate:0 16px}
+.chip{display:grid;gap:3px;padding:12px 16px;border-radius:14px;text-align:left;
   background:rgba(14,22,25,.62);border:1px solid var(--line-strong);backdrop-filter:blur(14px);
-  box-shadow:0 18px 40px -22px rgba(0,0,0,.95);white-space:nowrap}
+  box-shadow:0 18px 40px -22px rgba(0,0,0,.95)}
 .chip b{font-family:var(--font-display);font-size:.88rem;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
 .chip .mono{font-size:.6rem;letter-spacing:.16em}
-.chip-1{top:11%;left:0;transform:translateX(-72%)}
-.chip-2{top:38%;right:0;transform:translateX(76%)}
-.chip-3{bottom:19%;left:0;transform:translateX(-62%)}
-.chip-4{bottom:1%;right:0;transform:translateX(60%)}
-@media (max-width:1040px){
-  .chip-1{transform:translateX(-34%)}.chip-2{transform:translateX(36%)}
-  .chip-3{transform:translateX(-26%)}.chip-4{transform:translateX(24%)}
-}
-@media (max-height:760px){.portrait-stage{width:min(100%,272px)}}
-@media (max-width:720px){
-  .portrait-stage{width:min(100%,248px)}
-  .chip{padding:8px 11px;border-radius:11px}
-  .chip b{font-size:.76rem}
-  .chip .mono{font-size:.54rem}
-  .chip-1{transform:translateX(-18%)}.chip-2{transform:translateX(20%)}
-  .chip-3{transform:translateX(-14%)}.chip-4{transform:translateX(12%)}
+@media (max-height:760px){.portrait{width:clamp(200px,24vw,276px)}}
+@media (max-width:760px){
+  .hero-figure{grid-template-columns:1fr;gap:16px;perspective:none}
+  .portrait{order:-1;width:min(70vw,246px)}
+  .chip-col,.chip-col.is-right{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;justify-items:stretch;gap:10px}
+  .chip-col > .chip:first-child,.chip-col > .chip:last-child{translate:none}
+  .chip{padding:10px 13px;border-radius:12px}
+  .chip b{font-size:.79rem}
+  .chip .mono{font-size:.55rem}
 }
 
 .hero .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 16px;border-radius:999px;
@@ -337,7 +334,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .d4{animation-delay:.29s}.d5{animation-delay:.37s}.d6{animation-delay:.45s}
   .chip{animation:chipIn .8s cubic-bezier(.16,.8,.3,1) both}
   .chip-1{animation-delay:.5s}.chip-2{animation-delay:.6s}.chip-3{animation-delay:.68s}.chip-4{animation-delay:.76s}
-  .portrait-stage{animation:float 9s ease-in-out 1.6s infinite}
+  .portrait{animation:float 9s ease-in-out 1.6s infinite}
   .orb-1{animation:drift1 26s ease-in-out infinite}
   .orb-2{animation:drift2 32s ease-in-out infinite}
   .orb-3{animation:drift1 38s ease-in-out infinite reverse}
@@ -345,7 +342,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .js-reveal .reveal.is-in{opacity:1;transform:none}
 }
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-@keyframes chipIn{from{opacity:0;transform:translate(var(--cx,0),14px) scale(.94)}}
+@keyframes chipIn{from{opacity:0;transform:translateY(12px) scale(.96)}}
 @keyframes float{0%,100%{translate:0 0}50%{translate:0 -12px}}
 @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,6%) scale(1.08)}}
 @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6%,-4%) scale(1.1)}}
@@ -389,14 +386,20 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <section class="hero">
     <div class="wrap">
 
-      <div class="portrait-stage" id="portraitStage">
-        <div class="portrait-frame">
-          <img src="assets/img/tim-portrait.jpg" alt="Porträt von Tim Finkler" width="733" height="1100" fetchpriority="high">
+      <div class="hero-figure" id="heroFigure">
+        <div class="chip-col">
+          <div class="chip chip-1"><span class="mono">Fokus</span><b>GenAI &amp; Agenten</b></div>
+          <div class="chip chip-3"><span class="mono">Basis</span><b>M.Eng. Mechatronik</b></div>
         </div>
-        <div class="chip chip-1" style="--cx:-56%"><span class="mono">Fokus</span><b>GenAI &amp; Agenten</b></div>
-        <div class="chip chip-2" style="--cx:58%"><span class="mono">Seit 2024</span><b>Capgemini, Köln</b></div>
-        <div class="chip chip-3" style="--cx:-46%"><span class="mono">Basis</span><b>M.Eng. Mechatronik</b></div>
-        <div class="chip chip-4" style="--cx:42%"><span class="mono">Davor</span><b>Robotik &amp; Automation</b></div>
+
+        <div class="portrait" id="portrait">
+          <img class="portrait-img" src="assets/img/tim-cutout.webp" alt="Porträt von Tim Finkler" width="820" height="1142" fetchpriority="high">
+        </div>
+
+        <div class="chip-col is-right">
+          <div class="chip chip-2"><span class="mono">Seit 2024</span><b>Capgemini, Köln</b></div>
+          <div class="chip chip-4"><span class="mono">Davor</span><b>Robotik &amp; Automation</b></div>
+        </div>
       </div>
 
       <p class="eyebrow intro d1"><span class="dot" aria-hidden="true"></span><span class="mono">GenAI Entwickler &amp; Berater · Köln</span></p>
@@ -786,14 +789,18 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   if (fine && !reduce){
     var glow = document.getElementById('cursorGlow');
-    var stage = document.getElementById('portraitStage');
+    var portrait = document.getElementById('portrait');
+    var chipCols = document.querySelectorAll('.chip-col');
     var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
     function loop(){
       cx += (tx - cx) * 0.12; cy += (ty - cy) * 0.12;
       if (glow) glow.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
-      if (stage){
+      if (portrait){
         var nx = (tx / window.innerWidth - 0.5), ny = (cy / window.innerHeight - 0.5);
-        stage.style.transform = 'translate3d(' + (nx * -16) + 'px,' + (ny * -10) + 'px,0)';
+        portrait.style.transform = 'rotateY(' + (nx * 7) + 'deg) rotateX(' + (ny * -5) + 'deg) translate3d(' + (nx * -12) + 'px,' + (ny * -8) + 'px,0)';
+        for (var i = 0; i < chipCols.length; i++){
+          chipCols[i].style.transform = 'translate3d(' + (nx * 10) + 'px,' + (ny * 7) + 'px,0)';
+        }
       }
       raf = (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) ? window.requestAnimationFrame(loop) : null;
     }
